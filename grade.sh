@@ -31,11 +31,7 @@ cp -r lib grading-area
 cd grading-area
 javac -cp $CPATH ListExamples.java TestListExamples.java
 
-EXITCODE=$?
-echo "the exit code of Javac is" $EXITCODE #exit code
-
-if [[$EXITCODE -eq 0 ]] 
-then
+if [[ $? -eq 0 ]]; then
     echo "Compile Success"
 else
     echo "Compile Failed"
@@ -43,6 +39,7 @@ else
     exit
 fi
 
+java -cp $CPATH org.junit.runner.JUnitCore TestListExamples
 
 
 
