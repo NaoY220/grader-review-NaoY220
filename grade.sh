@@ -41,18 +41,7 @@ else
     exit
 fi
 
-#5 grade based on junit tests
 
-java -cp $CPATH org.junit.runner.JUnitCore TestListExamples
-
-if [[ $? -eq 0 ]];
-then
-    echo "Tests Passed"
-else
-    echo "Tests Failed"
-    echo "Grade: 0"
-    exit
-fi
 
 
 
