@@ -29,11 +29,9 @@ cp -r lib grading-area
 #4 compile java files and check if compiled
 
 cd grading-area
-
 javac -cp $CPATH ListExamples.java TestListExamples.java
 
-if [[ $? -eq 0 ]];
-then
+if [[ $? -eq 0 ]]; then
     echo "Compile Success"
 else
     echo "Compile Failed"
@@ -41,10 +39,11 @@ else
     exit
 fi
 
+java -cp $CPATH org.junit.runner.JUnitCore TestListExamples
 
 
 
-
+#5
 #6
 
 
