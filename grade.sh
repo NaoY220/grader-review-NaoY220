@@ -5,8 +5,50 @@ rm -rf grading-area
 
 mkdir grading-area
 
+
+#1. clone student repository
 git clone $1 student-submission
 echo 'Finished cloning'
+
+#2 check that student code has ListExamples.java
+
+if [[ -f student-submission/ListExamples.java ]]; then
+    echo "ListExamples.java exists"
+else 
+    echo "List.Examples.java DNE"
+    echo "Grade: 0"
+    exit
+fi
+
+
+#3 put all relevant files into grading-area directory, ListExamples.java, TestListExamples.java, lib directory
+
+cp student-submission/ListExamples.java TestListExamples.java grading-area
+cp -r lib grading-area
+
+#4 compile java files and check if compiled
+
+cd grading-area
+javac -cp $CPATH ListExamples.java TestListExamples.java
+
+EXITCODE=$?
+echo "the exit code of Javac is" $EXITCODE #exit code
+
+if [[$EXITCODE -eq 0 ]] 
+then
+    echo "Compile Success"
+else
+    echo "Compile Failed"
+    echo "Grade: 0"
+    exit
+fi
+
+
+
+
+#5
+#6
+
 
 
 # Draw a picture/take notes on the directory structure that's set up after
