@@ -29,12 +29,10 @@ cp -r lib grading-area
 #4 compile java files and check if compiled
 
 cd grading-area
+
 javac -cp $CPATH ListExamples.java TestListExamples.java
 
-EXITCODE=$?
-echo "the exit code of Javac is" $EXITCODE #exit code
-
-if [[$EXITCODE -eq 0 ]] 
+if [[ $? -eq 0 ]];
 then
     echo "Compile Success"
 else
@@ -43,10 +41,21 @@ else
     exit
 fi
 
+#5 grade based on junit tests
+
+java -cp $CPATH org.junit.runner.JUnitCore TestListExamples
+
+if [[ $? -eq 0 ]];
+then
+    echo "Tests Passed"
+else
+    echo "Tests Failed"
+    echo "Grade: 0"
+    exit
+fi
 
 
 
-#5
 #6
 
 
