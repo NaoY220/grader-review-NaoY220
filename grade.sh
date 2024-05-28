@@ -16,7 +16,7 @@ if [[ -f student-submission/ListExamples.java ]]; then
     echo "ListExamples.java exists"
 else 
     echo "List.Examples.java DNE"
-    echo "Grade: 0"
+    echo "Grade: 0/11"
     exit
 fi
 
@@ -39,12 +39,26 @@ else
     exit
 fi
 
-java -cp $CPATH org.junit.runner.JUnitCore TestListExamples
+java -cp $CPATH org.junit.runner.JUnitCore TestListExamples > test-output.txt
+
+echo "Test output can be found at list-examples-grader/grading-area/test-output.txt"
+
+grep "FAILURES!!" test-output.txt
+
+if [[ $? -eq 1 ]]; then
+    echo "Grade: 11/11"
+    exit
+else
+    grep "Tests run: " test-output.txt > grep-output.txt
+    COMPLEMGRADE=$(cut -d " " -f 6 grep-output.txt)
+    TOTAL=11
+    GRADE="$(($TOTAL - $COMPLEMGRADE))"
+    echo "Grade: $GRADE/11"
+    exit
+fi
 
 
-
-#5
-#6
+#bash grade.sh https://github.com/ucsd-cse15l-f22/list-methods-lab3
 
 
 
